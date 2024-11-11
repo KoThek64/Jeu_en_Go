@@ -13,9 +13,9 @@ func (f *Floor) Init() {
 	}
 
 	switch configuration.Global.FloorKind {
-	case fromFileFloor:
+	case FromFileFloor:
 		f.fullContent = readFloorFromFile(configuration.Global.FloorFile)
-	case quadTreeFloor:
+	case QuadTreeFloor:
 		f.quadtreeContent = quadtree.MakeFromArray(readFloorFromFile(configuration.Global.FloorFile))
 	}
 }

@@ -12,41 +12,52 @@ import (
 // On aurait pu se passer de cette fonction et tout faire dans Draw.
 // Mais cela permet de découpler le calcul de l'affichage.
 func (f *Floor) Update(camXPos, camYPos int) {
+	topLeftX := camXPos - configuration.Global.ScreenCenterTileX
+	topLeftY := camYPos - configuration.Global.ScreenCenterTileY
 	switch configuration.Global.FloorKind {
-	case gridFloor:
-		f.updateGridFloor(camXPos, camYPos)
-	case fromFileFloor:
-		f.updateFromFileFloor(camXPos, camYPos)
-	case quadTreeFloor:
-		f.updateQuadtreeFloor(camXPos, camYPos)
+	case GridFloor:
+		f.updateGridFloor(topLeftX, topLeftY)
+	case FromFileFloor:
+		f.updateFromFileFloor(topLeftX, topLeftY)
+	case QuadTreeFloor:
+		f.updateQuadtreeFloor(topLeftX, topLeftY)
 	}
 }
 
 // le sol est un quadrillage de tuiles d'herbe et de tuiles de désert
-func (f *Floor) updateGridFloor(camXPos, camYPos int) {
+func (f *Floor) updateGridFloor(topLeftX, topLeftY int) {
 	for y := 0; y < len(f.content); y++ {
 		for x := 0; x < len(f.content[y]); x++ {
-			absCamX := camXPos
-			if absCamX < 0 {
-				absCamX = -absCamX
+			absX := topLeftX
+			if absX < 0 {
+				absX = -absX
 			}
-			absCamY := camYPos
-			if absCamY < 0 {
-				absCamY = -absCamY
+			absY := topLeftY
+			if absY < 0 {
+				absY = -absY
 			}
-			f.content[y][x] = ((x + absCamX%2) + (y + absCamY%2)) % 2
+			f.content[y][x] = ((x + absX%2) + (y + absY%2)) % 2
 		}
 	}
 }
 
 // le sol est récupéré depuis un tableau, qui a été lu dans un fichier
-func (f *Floor) updateFromFileFloor(camXPos, camYPos int) {
-	// TODO
+//
+// la version actuelle recopie fullContent dans content, ce qui n'est pas
+// le comportement attendu dans le rendu du projet
+func (f *Floor) updateFromFileFloor(topLeftX, topLeftY int) {
+	for y := 0; y < len(f.content); y++ {
+		for x := 0; x < len(f.content[y]); x++ {
+			if y < len(f.fullContent) && x < len(f.fullContent[y]) {
+				f.content[y][x] = f.fullContent[y][x]
+			} else {
+				f.content[y][x] = -1
+			}
+		}
+	}
 }
 
 // le sol est récupéré depuis un quadtree, qui a été lu dans un fichier
-func (f *Floor) updateQuadtreeFloor(camXPos, camYPos int) {
-	topLeftX := camXPos - configuration.Global.ScreenCenterTileX
-	topLeftY := camYPos - configuration.Global.ScreenCenterTileY
+func (f *Floor) updateQuadtreeFloor(topLeftX, topLeftY int) {
 	f.quadtreeContent.GetContent(topLeftX, topLeftY, f.content)
 }

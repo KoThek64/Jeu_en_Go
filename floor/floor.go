@@ -18,7 +18,24 @@ type Floor struct {
 
 // types d'affichage du terrain disponibles
 const (
-	gridFloor int = iota
-	fromFileFloor
-	quadTreeFloor
+	GridFloor int = iota
+	FromFileFloor
+	QuadTreeFloor
 )
+
+// GetHeight retourne la hauteur (en cases) du terrain
+// à partir du tableau fullContent, en supposant que
+// ce tableau représente un terrain rectangulaire
+func (f Floor) GetHeight() (height int) {
+	return len(f.fullContent)
+}
+
+// GetWidth retourne la largeur (en cases) du terrain
+// à partir du tableau fullContent, en supposant que
+// ce tableau représente un terrain rectangulaire
+func (f Floor) GetWidth() (width int) {
+	if len(f.fullContent) > 0 {
+		width = len(f.fullContent[0])
+	}
+	return
+}
