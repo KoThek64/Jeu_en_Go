@@ -48,8 +48,11 @@ func (f *Floor) updateGridFloor(topLeftX, topLeftY int) {
 func (f *Floor) updateFromFileFloor(topLeftX, topLeftY int) {
 	for y := 0; y < len(f.content); y++ {
 		for x := 0; x < len(f.content[y]); x++ {
-			if y < len(f.fullContent) && x < len(f.fullContent[y]) {
-				f.content[y][x] = f.fullContent[y][x]
+			vraiY := y + topLeftY
+			vraiX := x + topLeftX
+
+			if vraiY >= 0 && vraiY < len(f.fullContent) && vraiX >= 0 && vraiX < len(f.fullContent[vraiY]) {
+				f.content[y][x] = f.fullContent[vraiY][vraiX]
 			} else {
 				f.content[y][x] = -1
 			}
