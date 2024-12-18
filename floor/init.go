@@ -5,9 +5,7 @@ import (
 	"gitlab.univ-nantes.fr/jezequel-l/quadtree/quadtree"
 	"bufio"
 	"strconv"
-	"log"
 	"os"
-	"fmt"
 )
 
 // Init initialise les structures de données internes de f.
@@ -40,7 +38,7 @@ func readFloorFromFile(fileName string) (floorContent [][]int) {
         ligne := make([]int, len(txt))
 
         for carIndex :=  0; carIndex < len(txt); carIndex ++ {
-
+			
             n, err := strconv.Atoi(txt[carIndex:carIndex+1])
             if err != nil { panic(err) }
 
