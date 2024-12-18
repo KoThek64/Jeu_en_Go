@@ -5,9 +5,7 @@ import (
 	"gitlab.univ-nantes.fr/jezequel-l/quadtree/quadtree"
 	"bufio"
 	"strconv"
-	"log"
 	"os"
-	"fmt"
 )
 
 // Init initialise les structures de données internes de f.
