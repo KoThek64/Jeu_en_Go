@@ -52,7 +52,7 @@ check_leaf:
 // - floorContent : le tableau 2D à convertir en quadtree.
 func MakeFromArray(floorContent [][]int) Quadtree {
 	if configuration.Global.RandomGeneration {
-		
+		return 
 	}
 
 	width := len(floorContent[0])  // Obtenir la largeur du terrain
