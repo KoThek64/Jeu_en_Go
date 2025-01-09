@@ -1,5 +1,7 @@
 package quadtree
 
+import "gitlab.univ-nantes.fr/jezequel-l/quadtree/configuration"
+
 // makeFromArrayRecursive construit un nœud de quadtree de manière récursive à partir d'un tableau 2D donné.
 // - floorContent : le tableau 2D représentant le terrain.
 // - topLeftX, topLeftY : coordonnées du coin supérieur gauche de la zone actuelle du nœud.
@@ -49,6 +51,10 @@ check_leaf:
 // MakeFromArray construit un quadtree à partir d'un tableau 2D représentant un terrain.
 // - floorContent : le tableau 2D à convertir en quadtree.
 func MakeFromArray(floorContent [][]int) Quadtree {
+	if configuration.Global.RandomGeneration {
+		
+	}
+
 	width := len(floorContent[0])  // Obtenir la largeur du terrain
 	height := len(floorContent)    // Obtenir la hauteur du terrain
 
