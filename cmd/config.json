@@ -8,6 +8,9 @@
     "NumTileForDebug": 6,
     "CameraMode": 1,
     "FloorKind": 1,
+
     "RandomGeneration": false,
-    "FloorFile": "../floor-files/beaupasbeau"
+    "RandomDimensions": [5,5],
+
+    "FloorFile": "../floor-files/validation"
 }
