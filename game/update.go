@@ -1,5 +1,10 @@
 package game
 
+import (
+	"github.com/hajimehoshi/ebiten/v2"
+	"gitlab.univ-nantes.fr/jezequel-l/quadtree/configuration"
+)
+
 // Update met à jour les données du jeu à chaque 1/60 de seconde.
 // Il faut bien faire attention à l'ordre des mises-à-jour car elles
 // dépendent les unes des autres (par exemple, pour le moment, la
@@ -10,5 +15,39 @@ func (g *Game) Update() error {
 	g.character.Update(blocking, g.floor)
 	g.camera.Update(g.character.X, g.character.Y)
 	g.floor.Update(g.camera.X, g.camera.Y)
+
+	if configuration.Global.Zoomable {
+		g.handleZoom()
+	}
+
 	return nil
+}
+
+var zoomInPressed bool = false
+var zoomOutPressed bool = false
+
+func (g *Game) handleZoom() {
+	if ebiten.IsKeyPressed(ebiten.KeyNumpadAdd) && !zoomInPressed {
+		zoomInPressed = true
+		configuration.Global.NumTileX -= 3
+		configuration.Global.NumTileY -= 3
+		if configuration.Global.NumTileX < 3 {
+			configuration.Global.NumTileX = 3
+		}
+		if configuration.Global.NumTileY < 3 {
+			configuration.Global.NumTileY = 3
+		}
+		configuration.Global.SetComputedFields()
+	} else if !ebiten.IsKeyPressed(ebiten.KeyNumpadAdd) && zoomInPressed {
+		zoomInPressed = false
+	}
+
+	if ebiten.IsKeyPressed(ebiten.KeyNumpadSubtract) && !zoomOutPressed {
+		zoomOutPressed = true
+		configuration.Global.NumTileX += 3
+		configuration.Global.NumTileY += 3
+		configuration.Global.SetComputedFields()
+	} else if !ebiten.IsKeyPressed(ebiten.KeyNumpadSubtract) && zoomOutPressed {
+		zoomOutPressed = false
+	}
 }

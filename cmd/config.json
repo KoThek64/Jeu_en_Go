@@ -13,6 +13,7 @@
     "RandomDimensions": [5,5],
 
     "AvoidWater": false,
+    "Zoomable": true,
 
     "FloorFile": "../floor-files/exemple"
 }

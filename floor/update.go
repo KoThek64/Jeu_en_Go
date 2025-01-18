@@ -14,6 +14,10 @@ import (
 func (f *Floor) Update(camXPos, camYPos int) {
 	topLeftX := camXPos - configuration.Global.ScreenCenterTileX
 	topLeftY := camYPos - configuration.Global.ScreenCenterTileY
+	f.Content = make([][]int, configuration.Global.NumTileY)
+	for y := 0; y < len(f.Content); y++ {
+		f.Content[y] = make([]int, configuration.Global.NumTileX)
+	}
 	switch configuration.Global.FloorKind {
 	case GridFloor:
 		f.updateGridFloor(topLeftX, topLeftY)

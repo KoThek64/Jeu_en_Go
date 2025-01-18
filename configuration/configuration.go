@@ -45,13 +45,15 @@ type Configuration struct {
 	FloorKind                     int
 	FloorFile                     string
 
-	RandomGeneration 			  bool
-	RandomDimensions 			  []int
+	RandomGeneration bool
+	RandomDimensions []int
 
-	AvoidWater 					  bool
+	AvoidWater bool
 
 	ScreenWidth, ScreenHeight            int `json:"-"`
 	ScreenCenterTileX, ScreenCenterTileY int `json:"-"`
+
+	Zoomable bool `json:"Zoomable"`
 }
 
 // Global est la variable qui contient la configuration
@@ -75,14 +77,14 @@ func Load(configurationFileName string) {
 		log.Fatal("Error while reading configuration file: ", err)
 	}
 
-	setComputedFields()
+	Global.SetComputedFields()
 }
 
 // setComputedFields se charge de remplir les champs calculés
 // de la configuration à partir des autres champs.
-func setComputedFields() {
-	Global.ScreenWidth = Global.NumTileX * Global.TileSize
-	Global.ScreenHeight = Global.NumTileY * Global.TileSize
-	Global.ScreenCenterTileX = Global.NumTileX / 2
-	Global.ScreenCenterTileY = Global.NumTileY / 2
+func (c *Configuration) SetComputedFields() {
+    c.ScreenWidth = c.NumTileX * c.TileSize
+    c.ScreenHeight = c.NumTileY * c.TileSize
+    c.ScreenCenterTileX = c.NumTileX / 2
+    c.ScreenCenterTileY = c.NumTileY / 2
 }
