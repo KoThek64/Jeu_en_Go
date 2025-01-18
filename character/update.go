@@ -20,25 +20,25 @@ func (c *Character) Update(blocking [4]bool, f floor.Floor) {
 		if configuration.Global.AvoidWater {
 			if ebiten.IsKeyPressed(ebiten.KeyRight) {
 				c.orientation = orientedRight
-				if !blocking[1] && f.Content[relativeYPos][relativeXPos+1] != 4 {
+				if !blocking[1] && f.Content[relativeYPos][relativeXPos+1] != 4 && c.X+1 < f.GetWidth() {
 					c.xInc = 1
 					c.moving = true
 				}
 			} else if ebiten.IsKeyPressed(ebiten.KeyLeft) {
 				c.orientation = orientedLeft
-				if !blocking[3] && f.Content[relativeYPos][relativeXPos-1] != 4 {
+				if !blocking[3] && f.Content[relativeYPos][relativeXPos-1] != 4 && c.X-1 >= 0 {
 					c.xInc = -1
 					c.moving = true
 				}
 			} else if ebiten.IsKeyPressed(ebiten.KeyUp) {
 				c.orientation = orientedUp
-				if !blocking[0] && f.Content[relativeYPos-1][relativeXPos] != 4 {
+				if !blocking[0] && f.Content[relativeYPos-1][relativeXPos] != 4 && c.Y-1 >= 0 {
 					c.yInc = -1
 					c.moving = true
 				}
 			} else if ebiten.IsKeyPressed(ebiten.KeyDown) {
 				c.orientation = orientedDown
-				if !blocking[2] && f.Content[relativeYPos+1][relativeXPos] != 4 {
+				if !blocking[2] && f.Content[relativeYPos+1][relativeXPos] != 4 && c.Y+1 < f.GetHeight() {
 					c.yInc = 1
 					c.moving = true
 				}
@@ -46,25 +46,25 @@ func (c *Character) Update(blocking [4]bool, f floor.Floor) {
 		} else {
 			if ebiten.IsKeyPressed(ebiten.KeyRight) {
 				c.orientation = orientedRight
-				if !blocking[1] {
+				if !blocking[1] && c.X+1 < f.GetWidth() {
 					c.xInc = 1
 					c.moving = true
 				}
 			} else if ebiten.IsKeyPressed(ebiten.KeyLeft) {
 				c.orientation = orientedLeft
-				if !blocking[3] {
+				if !blocking[3] && c.X-1 >= 0 {
 					c.xInc = -1
 					c.moving = true
 				}
 			} else if ebiten.IsKeyPressed(ebiten.KeyUp) {
 				c.orientation = orientedUp
-				if !blocking[0] {
+				if !blocking[0] && c.Y-1 >= 0 {
 					c.yInc = -1
 					c.moving = true
 				}
 			} else if ebiten.IsKeyPressed(ebiten.KeyDown) {
 				c.orientation = orientedDown
-				if !blocking[2] {
+				if !blocking[2] && c.Y+1 < f.GetHeight() {
 					c.yInc = 1
 					c.moving = true
 				}
