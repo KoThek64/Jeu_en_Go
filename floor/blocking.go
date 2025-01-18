@@ -10,10 +10,17 @@ func (f Floor) Blocking(characterXPos, characterYPos, camXPos, camYPos int) (blo
 	relativeXPos := characterXPos - camXPos + configuration.Global.ScreenCenterTileX
 	relativeYPos := characterYPos - camYPos + configuration.Global.ScreenCenterTileY
 
-	blocking[0] = relativeYPos <= 0 || f.Content[relativeYPos-1][relativeXPos] == -1 || f.Content[relativeYPos-1][relativeXPos] == 1 // 1 représente l'eau
-	blocking[1] = relativeXPos >= configuration.Global.NumTileX-1 || f.Content[relativeYPos][relativeXPos+1] == -1 || f.Content[relativeYPos][relativeXPos+1] == 1
-	blocking[2] = relativeYPos >= configuration.Global.NumTileY-1 || f.Content[relativeYPos+1][relativeXPos] == -1 || f.Content[relativeYPos+1][relativeXPos] == 1
-	blocking[3] = relativeXPos <= 0 || f.Content[relativeYPos][relativeXPos-1] == -1 || f.Content[relativeYPos][relativeXPos-1] == 1
+	if configuration.Global.AvoidWater {
+		blocking[0] = relativeYPos <= 0 || f.Content[relativeYPos-1][relativeXPos] == 4
+		blocking[1] = relativeXPos >= configuration.Global.NumTileX-1 || f.Content[relativeYPos][relativeXPos+1] == 4
+		blocking[2] = relativeYPos >= configuration.Global.NumTileY-1 || f.Content[relativeYPos+1][relativeXPos] == 4
+		blocking[3] = relativeXPos <= 0 || f.Content[relativeYPos][relativeXPos-1] == 4
+	} else {
+		blocking[0] = relativeYPos <= 0
+		blocking[1] = relativeXPos >= configuration.Global.NumTileX-1
+		blocking[2] = relativeYPos >= configuration.Global.NumTileY-1
+		blocking[3] = relativeXPos <= 0
+	}
 
-	return blocking
+	return
 }
