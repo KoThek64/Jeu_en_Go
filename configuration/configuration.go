@@ -46,7 +46,7 @@ type Configuration struct {
 	FloorFile                     string
 
 	RandomGeneration bool
-	RandomDimensions []int
+	RandomMapDimensions []int
 
 	AvoidWater bool
 

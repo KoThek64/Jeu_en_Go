@@ -9,10 +9,10 @@
     "CameraMode": 1,
     "FloorKind": 1,
 
-    "RandomGeneration": false,
-    "RandomDimensions": [5,5],
+    "RandomGeneration": true,
+    "RandomMapDimensions": [5,5],
 
-    "AvoidWater": false,
+    "AvoidWater": true,
     "Zoomable": true,
 
     "FloorFile": "../floor-files/exemple"
