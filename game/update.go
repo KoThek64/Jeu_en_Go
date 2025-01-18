@@ -27,7 +27,7 @@ var zoomInPressed bool = false
 var zoomOutPressed bool = false
 
 func (g *Game) handleZoom() {
-	if ebiten.IsKeyPressed(ebiten.KeyNumpadAdd) && !zoomInPressed {
+	if ebiten.IsKeyPressed(ebiten.KeyO) && !zoomInPressed {
 		zoomInPressed = true
 		configuration.Global.NumTileX -= 1
 		configuration.Global.NumTileY -= 1
@@ -38,16 +38,16 @@ func (g *Game) handleZoom() {
 			configuration.Global.NumTileY = 4
 		}
 		configuration.Global.SetComputedFields()
-	} else if !ebiten.IsKeyPressed(ebiten.KeyNumpadAdd) && zoomInPressed {
+	} else if !ebiten.IsKeyPressed(ebiten.KeyO) && zoomInPressed {
 		zoomInPressed = false
 	}
 
-	if ebiten.IsKeyPressed(ebiten.KeyNumpadSubtract) && !zoomOutPressed {
+	if ebiten.IsKeyPressed(ebiten.KeyP) && !zoomOutPressed {
 		zoomOutPressed = true
 		configuration.Global.NumTileX += 1
 		configuration.Global.NumTileY += 1
 		configuration.Global.SetComputedFields()
-	} else if !ebiten.IsKeyPressed(ebiten.KeyNumpadSubtract) && zoomOutPressed {
+	} else if !ebiten.IsKeyPressed(ebiten.KeyP) && zoomOutPressed {
 		zoomOutPressed = false
 	}
 }
