@@ -10,6 +10,14 @@ func (f Floor) Blocking(characterXPos, characterYPos, camXPos, camYPos int) (blo
 	relativeXPos := characterXPos - camXPos + configuration.Global.ScreenCenterTileX
 	relativeYPos := characterYPos - camYPos + configuration.Global.ScreenCenterTileY
 
+	if relativeXPos < 0 || relativeXPos >= len(f.Content[0]) || relativeYPos < 0 || relativeYPos >= len(f.Content) {
+		blocking[0] = true
+		blocking[1] = true
+		blocking[2] = true
+		blocking[3] = true
+		return
+	}
+
 	if configuration.Global.AvoidWater {
 		blocking[0] = relativeYPos <= 0 || f.Content[relativeYPos-1][relativeXPos] == 4
 		blocking[1] = relativeXPos >= configuration.Global.NumTileX-1 || f.Content[relativeYPos][relativeXPos+1] == 4

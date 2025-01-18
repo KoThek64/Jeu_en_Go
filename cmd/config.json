@@ -10,7 +10,7 @@
     "FloorKind": 1,
 
     "RandomGeneration": true,
-    "RandomMapDimensions": [5,5],
+    "RandomMapDimensions": [50,50],
 
     "AvoidWater": true,
     "Zoomable": true,
