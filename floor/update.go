@@ -26,8 +26,8 @@ func (f *Floor) Update(camXPos, camYPos int) {
 
 // le sol est un quadrillage de tuiles d'herbe et de tuiles de désert
 func (f *Floor) updateGridFloor(topLeftX, topLeftY int) {
-	for y := 0; y < len(f.content); y++ {
-		for x := 0; x < len(f.content[y]); x++ {
+	for y := 0; y < len(f.Content); y++ {
+		for x := 0; x < len(f.Content[y]); x++ {
 			absX := topLeftX
 			if absX < 0 {
 				absX = -absX
@@ -36,7 +36,7 @@ func (f *Floor) updateGridFloor(topLeftX, topLeftY int) {
 			if absY < 0 {
 				absY = -absY
 			}
-			f.content[y][x] = ((x + absX%2) + (y + absY%2)) % 2
+			f.Content[y][x] = ((x + absX%2) + (y + absY%2)) % 2
 		}
 	}
 }
@@ -46,15 +46,15 @@ func (f *Floor) updateGridFloor(topLeftX, topLeftY int) {
 // la version actuelle recopie fullContent dans content, ce qui n'est pas
 // le comportement attendu dans le rendu du projet
 func (f *Floor) updateFromFileFloor(topLeftX, topLeftY int) {
-	for y := 0; y < len(f.content); y++ {
-		for x := 0; x < len(f.content[y]); x++ {
+	for y := 0; y < len(f.Content); y++ {
+		for x := 0; x < len(f.Content[y]); x++ {
 			vraiY := y + topLeftY
 			vraiX := x + topLeftX
 
-			if vraiY >= 0 && vraiY < len(f.fullContent) && vraiX >= 0 && vraiX < len(f.fullContent[vraiY]) {
-				f.content[y][x] = f.fullContent[vraiY][vraiX]
+			if vraiY >= 0 && vraiY < len(f.FullContent) && vraiX >= 0 && vraiX < len(f.FullContent[vraiY]) {
+				f.Content[y][x] = f.FullContent[vraiY][vraiX]
 			} else {
-				f.content[y][x] = -1
+				f.Content[y][x] = -1
 			}
 		}
 	}
@@ -62,5 +62,5 @@ func (f *Floor) updateFromFileFloor(topLeftX, topLeftY int) {
 
 // le sol est récupéré depuis un quadtree, qui a été lu dans un fichier
 func (f *Floor) updateQuadtreeFloor(topLeftX, topLeftY int) {
-	f.quadtreeContent.GetContent(topLeftX, topLeftY, f.content)
+	f.QuadtreeContent.GetContent(topLeftX, topLeftY, f.Content)
 }

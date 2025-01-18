@@ -10,16 +10,16 @@ import (
 
 // Init initialise les structures de données internes de f.
 func (f *Floor) Init() {
-	f.content = make([][]int, configuration.Global.NumTileY)
-	for y := 0; y < len(f.content); y++ {
-		f.content[y] = make([]int, configuration.Global.NumTileX)
+	f.Content = make([][]int, configuration.Global.NumTileY)
+	for y := 0; y < len(f.Content); y++ {
+		f.Content[y] = make([]int, configuration.Global.NumTileX)
 	}
 
 	switch configuration.Global.FloorKind {
 	case FromFileFloor:
-		f.fullContent = readFloorFromFile(configuration.Global.FloorFile)
+		f.FullContent = readFloorFromFile(configuration.Global.FloorFile)
 	case QuadTreeFloor:
-		f.quadtreeContent = quadtree.MakeFromArray(readFloorFromFile(configuration.Global.FloorFile))
+		f.QuadtreeContent = quadtree.MakeFromArray(readFloorFromFile(configuration.Global.FloorFile))
 	}
 }
 

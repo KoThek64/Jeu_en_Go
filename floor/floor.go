@@ -11,9 +11,9 @@ import "gitlab.univ-nantes.fr/jezequel-l/quadtree/quadtree"
 //   - quadTreeContent : totalité du terrain sous forme de quadtree (utilisé
 //     avec le type d'affichage du terrain "quadtreeFloor")
 type Floor struct {
-	content         [][]int
-	fullContent     [][]int
-	quadtreeContent quadtree.Quadtree
+	Content         [][]int
+	FullContent     [][]int
+	QuadtreeContent quadtree.Quadtree
 }
 
 // types d'affichage du terrain disponibles
@@ -27,15 +27,15 @@ const (
 // à partir du tableau fullContent, en supposant que
 // ce tableau représente un terrain rectangulaire
 func (f Floor) GetHeight() (height int) {
-	return len(f.fullContent)
+	return len(f.FullContent)
 }
 
 // GetWidth retourne la largeur (en cases) du terrain
 // à partir du tableau fullContent, en supposant que
 // ce tableau représente un terrain rectangulaire
 func (f Floor) GetWidth() (width int) {
-	if len(f.fullContent) > 0 {
-		width = len(f.fullContent[0])
+	if len(f.FullContent) > 0 {
+		width = len(f.FullContent[0])
 	}
 	return
 }

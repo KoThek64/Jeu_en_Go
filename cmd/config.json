@@ -12,5 +12,7 @@
     "RandomGeneration": false,
     "RandomDimensions": [5,5],
 
-    "FloorFile": "../floor-files/validation"
+    "AvoidWater": false,
+
+    "FloorFile": "../floor-files/beaupasbeau"
 }

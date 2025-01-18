@@ -45,8 +45,10 @@ type Configuration struct {
 	FloorKind                     int
 	FloorFile                     string
 
-	RandomGeneration              bool
-	RandomDimensions              []int
+	RandomGeneration 			  bool
+	RandomDimensions 			  []int
+
+	AvoidWater 					  bool
 
 	ScreenWidth, ScreenHeight            int `json:"-"`
 	ScreenCenterTileX, ScreenCenterTileY int `json:"-"`

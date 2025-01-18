@@ -5,6 +5,8 @@ package game
 // pourraient dépendre les unes des autres.
 func (g *Game) Init() {
 	g.floor.Init()
-	g.character.Init(g.floor.GetWidth(), g.floor.GetHeight())
+	floorWidth := g.floor.GetWidth()
+	floorHeight := g.floor.GetHeight()
+	g.character.Init(g.floor, floorWidth, floorHeight)
 	g.camera.Init(g.character.X, g.character.Y)
 }
