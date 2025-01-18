@@ -17,29 +17,57 @@ func (c *Character) Update(blocking [4]bool, f floor.Floor) {
 	relativeYPos := c.Y - camYPos + configuration.Global.ScreenCenterTileY
 
 	if !c.moving {
-		if ebiten.IsKeyPressed(ebiten.KeyRight) {
-			c.orientation = orientedRight
-			if !blocking[1] && f.Content[relativeYPos][relativeXPos+1] != 4 {
-				c.xInc = 1
-				c.moving = true
+		if configuration.Global.AvoidWater {
+			if ebiten.IsKeyPressed(ebiten.KeyRight) {
+				c.orientation = orientedRight
+				if !blocking[1] && f.Content[relativeYPos][relativeXPos+1] != 4 {
+					c.xInc = 1
+					c.moving = true
+				}
+			} else if ebiten.IsKeyPressed(ebiten.KeyLeft) {
+				c.orientation = orientedLeft
+				if !blocking[3] && f.Content[relativeYPos][relativeXPos-1] != 4 {
+					c.xInc = -1
+					c.moving = true
+				}
+			} else if ebiten.IsKeyPressed(ebiten.KeyUp) {
+				c.orientation = orientedUp
+				if !blocking[0] && f.Content[relativeYPos-1][relativeXPos] != 4 {
+					c.yInc = -1
+					c.moving = true
+				}
+			} else if ebiten.IsKeyPressed(ebiten.KeyDown) {
+				c.orientation = orientedDown
+				if !blocking[2] && f.Content[relativeYPos+1][relativeXPos] != 4 {
+					c.yInc = 1
+					c.moving = true
+				}
 			}
-		} else if ebiten.IsKeyPressed(ebiten.KeyLeft) {
-			c.orientation = orientedLeft
-			if !blocking[3] && f.Content[relativeYPos][relativeXPos-1] != 4 {
-				c.xInc = -1
-				c.moving = true
-			}
-		} else if ebiten.IsKeyPressed(ebiten.KeyUp) {
-			c.orientation = orientedUp
-			if !blocking[0] && f.Content[relativeYPos-1][relativeXPos] != 4 {
-				c.yInc = -1
-				c.moving = true
-			}
-		} else if ebiten.IsKeyPressed(ebiten.KeyDown) {
-			c.orientation = orientedDown
-			if !blocking[2] && f.Content[relativeYPos+1][relativeXPos] != 4 {
-				c.yInc = 1
-				c.moving = true
+		} else {
+			if ebiten.IsKeyPressed(ebiten.KeyRight) {
+				c.orientation = orientedRight
+				if !blocking[1] {
+					c.xInc = 1
+					c.moving = true
+				}
+			} else if ebiten.IsKeyPressed(ebiten.KeyLeft) {
+				c.orientation = orientedLeft
+				if !blocking[3] {
+					c.xInc = -1
+					c.moving = true
+				}
+			} else if ebiten.IsKeyPressed(ebiten.KeyUp) {
+				c.orientation = orientedUp
+				if !blocking[0] {
+					c.yInc = -1
+					c.moving = true
+				}
+			} else if ebiten.IsKeyPressed(ebiten.KeyDown) {
+				c.orientation = orientedDown
+				if !blocking[2] {
+					c.yInc = 1
+					c.moving = true
+				}
 			}
 		}
 	} else {
