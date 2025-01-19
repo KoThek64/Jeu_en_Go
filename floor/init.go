@@ -12,6 +12,7 @@ import (
 
 // Init initialise les structures de données internes de f.
 func (f *Floor) Init() {
+	f.AlrRegistered = false
 	f.Content = make([][]int, configuration.Global.NumTileY)
 	for y := 0; y < len(f.Content); y++ {
 		f.Content[y] = make([]int, configuration.Global.NumTileX)
@@ -58,7 +59,6 @@ func readFloorFromFile(fileName string) (floorContent [][]int) {
 
     return
 }
-
 
 func RandomMapInFile(nomFichier string) error {
 	// Vider le fichier avant d'écrire de nouvelles données

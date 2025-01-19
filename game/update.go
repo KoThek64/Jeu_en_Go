@@ -1,6 +1,11 @@
 package game
 
 import (
+	"fmt"
+	"io"
+	"os"
+	"time"
+
 	"github.com/hajimehoshi/ebiten/v2"
 	"gitlab.univ-nantes.fr/jezequel-l/quadtree/configuration"
 )
@@ -19,6 +24,11 @@ func (g *Game) Update() error {
 	if configuration.Global.Zoomable {
 		g.handleZoom()
 	}
+
+	if !g.floor.AlrRegistered {
+		g.handleMapSaving()
+	}
+	
 
 	return nil
 }
@@ -49,5 +59,55 @@ func (g *Game) handleZoom() {
 		configuration.Global.SetComputedFields()
 	} else if !ebiten.IsKeyPressed(ebiten.KeyP) && zoomOutPressed {
 		zoomOutPressed = false
+	}
+}
+
+func (g *Game) handleMapSaving() {
+	// Vérifier si la touche S est pressée
+	if ebiten.IsKeyPressed(ebiten.KeyS) {
+		// Vérifier si une sauvegarde a déjà été enregistrée dans ce cycle
+
+		// Fonction pour sauvegarder
+		saveToFile := func() error {
+			// Obtenir la date et l'heure actuelles
+			now := time.Now()
+			timestamp := now.Format("2006-01-19_15-04") // Format : AAAA-MM-JJ_HH-MM
+
+			// Créer le chemin du fichier
+			outputDir := "../floor-files/enregistrement"
+			outputFile := fmt.Sprintf("%s/%s.txt", outputDir, timestamp) // Nom basé sur la date et l'heure
+
+			// Ouvrir le fichier source (celui que l'on veut copier)
+			sourceFile, err := os.Open("../floor-files/random")
+			if err != nil {
+				return fmt.Errorf("impossible d'ouvrir le fichier random : %v", err)
+			}
+			defer sourceFile.Close()
+
+			// Créer le fichier de destination
+			destFile, err := os.Create(outputFile)
+			if err != nil {
+				return fmt.Errorf("impossible de créer le fichier de destination : %v", err)
+			}
+			defer destFile.Close()
+
+			// Copier le contenu du fichier source vers le fichier de destination
+			_, err = io.Copy(destFile, sourceFile)
+			if err != nil {
+				return fmt.Errorf("impossible de copier le contenu du fichier : %v", err)
+			}
+
+			fmt.Printf("Map sauvegardé dans '%s'\n", outputFile)
+			return nil
+		}
+
+		// Appeler la fonction pour sauvegarder
+		err := saveToFile()
+		if err != nil {
+			fmt.Printf("Erreur lors de la sauvegarde : %v\n", err)
+		}
+
+		// Marquer comme déjà enregistré pour ce cycle
+		g.floor.AlrRegistered = true
 	}
 }

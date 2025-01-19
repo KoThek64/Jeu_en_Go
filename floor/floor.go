@@ -14,6 +14,8 @@ type Floor struct {
 	Content         [][]int
 	FullContent     [][]int
 	QuadtreeContent quadtree.Quadtree
+	
+	AlrRegistered   bool
 }
 
 // types d'affichage du terrain disponibles
