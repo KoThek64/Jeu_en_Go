@@ -45,10 +45,11 @@ type Configuration struct {
 	FloorKind                     int
 	FloorFile                     string
 
-	RandomGeneration bool
+	RandomGeneration    bool
 	RandomMapDimensions []int
 
-	AvoidWater bool
+	AvoidWater             bool
+	TeleportationExtension bool
 
 	ScreenWidth, ScreenHeight            int `json:"-"`
 	ScreenCenterTileX, ScreenCenterTileY int `json:"-"`
@@ -83,8 +84,8 @@ func Load(configurationFileName string) {
 // setComputedFields se charge de remplir les champs calculés
 // de la configuration à partir des autres champs.
 func (c *Configuration) SetComputedFields() {
-    c.ScreenWidth = c.NumTileX * c.TileSize
-    c.ScreenHeight = c.NumTileY * c.TileSize
-    c.ScreenCenterTileX = c.NumTileX / 2
-    c.ScreenCenterTileY = c.NumTileY / 2
+	c.ScreenWidth = c.NumTileX * c.TileSize
+	c.ScreenHeight = c.NumTileY * c.TileSize
+	c.ScreenCenterTileX = c.NumTileX / 2
+	c.ScreenCenterTileY = c.NumTileY / 2
 }

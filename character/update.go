@@ -17,7 +17,11 @@ func (c *Character) Update(blocking [4]bool, f floor.Floor) {
 	relativeYPos := c.Y - camYPos + configuration.Global.ScreenCenterTileY
 
 	if !c.moving {
-		if configuration.Global.AvoidWater {
+		teleported := false
+		if configuration.Global.TeleportationExtension {
+			teleported = c.teleport()
+		}
+		if configuration.Global.AvoidWater && !teleported {
 			if ebiten.IsKeyPressed(ebiten.KeyRight) {
 				c.orientation = orientedRight
 				if !blocking[1] && f.Content[relativeYPos][relativeXPos+1] != 4 && c.X+1 < f.GetWidth() {
@@ -43,7 +47,7 @@ func (c *Character) Update(blocking [4]bool, f floor.Floor) {
 					c.moving = true
 				}
 			}
-		} else {
+		} else if !configuration.Global.AvoidWater && !teleported {
 			if ebiten.IsKeyPressed(ebiten.KeyRight) {
 				c.orientation = orientedRight
 				if !blocking[1] && c.X+1 < f.GetWidth() {
