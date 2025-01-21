@@ -9,8 +9,10 @@
     "CameraMode": 1,
     "FloorKind": 1,
 
-    "RandomGeneration": true,
+    "RandomGeneration": false,
     "RandomMapDimensions": [50,50],
+    "LogicMapGeneration": true,
+    "LogicMapSize": 65,
 
     "AvoidWater": true,
     "Zoomable": true,

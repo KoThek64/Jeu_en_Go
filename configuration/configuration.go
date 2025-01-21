@@ -48,6 +48,9 @@ type Configuration struct {
 	RandomGeneration    bool
 	RandomMapDimensions []int
 
+	LogicMapGeneration bool
+	LogicMapSize       int
+
 	AvoidWater             bool
 	TeleportationExtension bool
 
