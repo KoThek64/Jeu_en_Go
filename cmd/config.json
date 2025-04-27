@@ -10,13 +10,13 @@
     "FloorKind": 1,
 
     "RandomGeneration": false,
-    "RandomMapDimensions": [50,50],
+    "RandomMapDimensions": [9, 9],
     "LogicMapGeneration": true,
     "LogicMapSize": 65,
 
-    "AvoidWater": true,
+    "AvoidWater": false,
     "Zoomable": true,
-    "TeleportationExtension" : true,
+    "TeleportationExtension" : false,
 
     "FloorFile": "../floor-files/exemple"
 }

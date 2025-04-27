@@ -227,7 +227,6 @@ func diamondSquared(size int) [][]int {
 				} else if n == 3 {
 					floorContent[x][y] = 3 // Bois
 				}
-				
 			}
 		}
 
