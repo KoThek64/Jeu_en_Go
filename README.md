@@ -133,7 +133,7 @@ sae/
 ### Prérequis
 
 - **Go 1.21** ou supérieur
-- Système d'exploitation : Linux, Windows ou macOS
+- Système d'exploitation : Linux ou Windows
 - Bibliothèques système pour GLFW (voir [documentation Ebitengine](https://ebitengine.org/en/documents/install.html))
 
 ### Installation
@@ -152,9 +152,6 @@ go build -o main
 
 # 4. Lancer le jeu
 ./main
-
-# Ou avec un fichier de configuration personnalisé
-./main -config config.json
 ```
 
 ### 🎮 Contrôles
