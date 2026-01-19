@@ -1,4 +1,4 @@
-# 🎮 Quadtree Game
+# 🎮 Jeu en Quadtree
 
 > Jeu 2D de navigation et d'exploration avec système de quadtree et téléportation.
 
@@ -12,7 +12,7 @@
 
 ## 📋 Contexte du projet
 
-**Quadtree Game** est un projet académique réalisé dans le cadre de la **SAÉ du Semestre 1** du BUT Informatique, combinant les ressources R1.01 (Introduction au développement) et SAÉ 1.01 (Implémentation d'un besoin client).
+**Le jeu en Quadtree** est un projet académique réalisé dans le cadre de la **SAÉ du Semestre 1** du BUT Informatique, combinant les ressources R1.01 (Introduction au développement) et SAÉ 1.01 (Implémentation d'un besoin client).
 
 | | |
 |---|---|
@@ -29,7 +29,7 @@
 
 ## 🎯 Présentation
 
-**Quadtree Game** est un jeu d'exploration 2D utilisant une structure de données quadtree pour optimiser le rendu et les collisions. Le joueur contrôle un personnage animé qui peut se déplacer dans un environnement généré aléatoirement ou chargé depuis un fichier, éviter des obstacles et utiliser des portails de téléportation.
+**Le Jeu en Quadtree** est un jeu d'exploration 2D utilisant une structure de données quadtree pour optimiser le rendu et les collisions. Le joueur contrôle un personnage animé qui peut se déplacer dans un environnement généré aléatoirement ou chargé depuis un fichier, éviter des obstacles et utiliser des portails de téléportation.
 
 ### ✨ Fonctionnalités principales
 
@@ -84,40 +84,40 @@ sae/
 │   ├── draw.go            # Rendu graphique
 │   └── layout.go          # Gestion de la disposition
 │
-├── character/             # Système de personnage
+├── character/              # Système de personnage
 │   ├── character.go       # Structure du personnage
 │   ├── init.go            # Initialisation
 │   ├── update.go          # Logique de déplacement
 │   ├── draw.go            # Rendu du personnage
 │   └── portail.go         # Gestion des portails
 │
-├── floor/                 # Système de terrain
+├── floor/                  # Système de terrain
 │   ├── floor.go           # Structure du niveau
 │   ├── init.go            # Chargement/génération
 │   ├── update.go          # Mise à jour du terrain
 │   ├── draw.go            # Rendu des tuiles
 │   └── blocking.go        # Gestion des collisions
 │
-├── quadtree/              # Structure de données quadtree
+├── quadtree/               # Structure de données quadtree
 │   ├── quadtree.go        # Définition de la structure
 │   ├── make.go            # Construction
 │   ├── get.go             # Requêtes spatiales
 │   ├── make_test.go       # Tests unitaires
 │   └── get_test.go
 │
-├── camera/                # Système de caméra
+├── camera/                 # Système de caméra
 │   ├── camera.go          # Structure de la caméra
 │   ├── init.go            # Initialisation
 │   └── update.go          # Suivi du personnage
 │
-├── assets/                # Ressources du jeu
+├── assets/                 # Ressources du jeu
 │   ├── assets.go          # Chargement des assets
 │   └── licence            # Licences des ressources
 │
-├── configuration/         # Gestion de la configuration
+├── configuration/          # Gestion de la configuration
 │   └── configuration.go   # Parseur JSON
 │
-├── floor-files/           # Fichiers de niveaux
+├── floor-files/            # Fichiers de niveaux
 │   ├── exemple            # Niveau d'exemple
 │   ├── logic              # Niveau logique
 │   ├── random             # Niveau aléatoire
@@ -140,7 +140,7 @@ sae/
 
 ```bash
 # 1. Cloner le projet
-git clone <url-du-repo>
+git clone https://github.com/KoThek64/Jeu_en_Go.git
 cd sae
 
 # 2. Installer les dépendances
@@ -170,18 +170,18 @@ Modifiez [cmd/config.json](cmd/config.json) pour personnaliser le jeu :
 
 ```json
 {
-    "DebugMode": false,              // Affiche les informations de debug
-    "NumTileX": 9,                   // Largeur de la carte en tuiles
-    "NumTileY": 9,                   // Hauteur de la carte en tuiles
-    "TileSize": 16,                  // Taille d'une tuile en pixels
-    "CameraMode": 1,                 // Mode de caméra (0: fixe, 1: suiveuse)
-    "FloorKind": 1,                  // Type de terrain
-    "RandomGeneration": false,       // Génération aléatoire
-    "LogicMapGeneration": true,      // Génération logique avancée
-    "LogicMapSize": 65,              // Taille de la carte logique
-    "AvoidWater": false,             // Activer les collisions avec l'eau
-    "Zoomable": true,                // Activer le zoom
-    "TeleportationExtension": false, // Activer les portails
+    "DebugMode": false,                   // Affiche les informations de debug
+    "NumTileX": 9,                        // Largeur de la carte en tuiles
+    "NumTileY": 9,                        // Hauteur de la carte en tuiles
+    "TileSize": 16,                       // Taille d'une tuile en pixels
+    "CameraMode": 1,                      // Mode de caméra (0: fixe, 1: suiveuse)
+    "FloorKind": 1,                       // Type de terrain
+    "RandomGeneration": false,            // Génération aléatoire
+    "LogicMapGeneration": true,           // Génération logique avancée
+    "LogicMapSize": 65,                   // Taille de la carte logique
+    "AvoidWater": false,                  // Activer les collisions avec l'eau
+    "Zoomable": true,                     // Activer le zoom
+    "TeleportationExtension": false,      // Activer les portails
     "FloorFile": "../floor-files/exemple" // Fichier de niveau à charger
 }
 ```
